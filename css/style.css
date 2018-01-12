@@ -1,0 +1,30 @@
+body {
+    text-align: center;
+    background: url('../images/beach.jpg');
+    background-size: auto;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+h3 {
+  font-size: 35px;
+}
+
+div {
+  font-size: 30px;
+}
+section {
+  margin-top: 40px;
+  margin-right: 30px;
+  float: right;
+  width: 35%;
+  font-family: 'Pirata One', cursive;
+
+}
+
+.scroll {
+    height: 600px;
+    overflow-y: auto;
+}
