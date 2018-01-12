@@ -14,19 +14,41 @@ let prevY = [];
 //determines if game is over
 let win = false;
 
-// //sound variables and functions
-// let waterSplash = "splash";
-//
-// function loadSounds () {
-//   createjs.Sound.registerSound("sounds/splash.wav", waterSplash);
-// }
-//
-// function playWaterSplash () {
-//   createjs.Sound.play(waterSplash);
-// }
-//
-// //loads all sounds
-// loadSounds();
+//sound variables and functions
+let splash = 'splash';
+let rescue = 'rescued';
+let blocked = 'rock';
+let caught = 'shark';
+let congrats = 'tada';
+
+function loadSounds() {
+  createjs.Sound.registerSound('sounds/splash.wav', splash);
+  createjs.Sound.registerSound('sounds/rescued.wav', rescue);
+  createjs.Sound.registerSound('sounds/rock.mp3', blocked);
+  createjs.Sound.registerSound('sounds/shark.wav', caught);
+  createjs.Sound.registerSound('sounds/tada.wav', congrats);
+
+};
+
+function playSplash() {
+  createjs.Sound.play(splash);
+};
+
+function playRescue() {
+  createjs.Sound.play(rescue);
+};
+function playBlocked() {
+  createjs.Sound.play(blocked);
+};
+function playCaught() {
+  createjs.Sound.play(caught);
+};
+function playCongrats() {
+  createjs.Sound.play(congrats);
+};
+
+//loads all sounds
+loadSounds();
 
 // enemies our player must avoid
 class Enemy {
@@ -94,10 +116,6 @@ class Player {
     (ctx.drawImage(Resources.get(this.sprite), this.x, this.y), playerWon())
   }
 
-  // halfRender() {
-  //   ctx.drawImage(Resources.get(this.sprite), 0, this.face, this.sprite.width, 60, this.x, this.y);
-  // }
-
   // method that controls player movement
   handleInput(key) {
     this.currentPosition();
@@ -106,29 +124,41 @@ class Player {
         player.x -= 100;
         this.boundary();
         this.col--;
+        if (player.y < 555) {
+          playSplash();
+        };
         break;
       case 'up':
         player.y -= 85;
         //check for score
         this.scored();
         this.row--;
+        if (player.y < 555) {
+          playSplash();
+        };
         break;
       case 'right':
         player.x += 100;
         this.boundary();
         this.col++;
+        if (player.y < 555) {
+          playSplash();
+        };
         break;
       case 'down':
         player.y += 85;
         this.boundary();
         this.row++;
+        if (player.y < 555) {
+          playSplash();
+        };
         break;
       case 'enter':
         if (win = true) {
           gameReset();
         }
     }
-  }
+  };
 
   // prevent player from leaving the game canvas
   boundary() {
@@ -150,7 +180,6 @@ class Player {
         allEnemies[e].x + 75 > player.x &&
         allEnemies[e].y < player.y + 50 &&
         50 + allEnemies[e].y > player.y) {
-        console.log("Collision!");
         player.died();
       }
     }
@@ -181,13 +210,14 @@ class Player {
       if (capturedFriends.length === 0) {
         win = true;
       }
-
+      playRescue();
     }
   }
 
   died() {
-    console.log('Player died!')
+    console.log('Shark food!')
     player.resetPosition();
+    playCaught();
   }
 
   //resets the player to initial position
@@ -219,6 +249,7 @@ class Player {
         40 + allObstacles[o].y > player.y) {
         console.log('Path is blocked!');
         player.stopMove();
+        playBlocked();
       }
     }
   }
@@ -274,7 +305,10 @@ function playerWon() {
   ctx.font = 'bold 23pt Pirata One';
   ctx.fillText('Press Enter to Play Again!', 353, 440);
   ctx.lineWidth = 1;
+
+  playCongrats();
 };
+
 // resets game to start state
 function gameReset() {
   allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6];
@@ -282,7 +316,7 @@ function gameReset() {
   capturedFriends = [capturedFriend1, capturedFriend2, capturedFriend3, capturedFriend4];
   freedFriends = [];
   win = false;
-}
+};
 
 // instantiate objects
 let player = new Player(300, 555);

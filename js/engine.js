@@ -183,11 +183,6 @@ var Engine = (function(global) {
 
         player.render();
 
-        // if (player.row == 7 || player.row < 2) {
-        //     player.render();
-        // } else { player.halfRender };
-
-
     }
 
     /* This function does nothing but it could have been a good place to
