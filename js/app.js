@@ -11,22 +11,22 @@ let obstacleYPosition = [130, 215, 300, 380, 465]
 let prevX = [];
 let prevY = [];
 
-//determines if game is over
-let win = false;
-
-//sound variables and functions
-let waterSplash = "splash";
-
-function loadSounds () {
-  createjs.Sound.registerSound("sounds/splash.wav", waterSplash);
-}
-
-function playWaterSplash () {
-  createjs.Sound.play(waterSplash);
-}
-
-//loads all sounds
-loadSounds();
+// //determines if game is over
+// let win = false;
+//
+// //sound variables and functions
+// let waterSplash = "splash";
+//
+// function loadSounds () {
+//   createjs.Sound.registerSound("sounds/splash.wav", waterSplash);
+// }
+//
+// function playWaterSplash () {
+//   createjs.Sound.play(waterSplash);
+// }
+//
+// //loads all sounds
+// loadSounds();
 
 // enemies our player must avoid
 class Enemy {
