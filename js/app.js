@@ -20,6 +20,7 @@ let rescue = 'rescued';
 let blocked = 'rock';
 let caught = 'shark';
 let congrats = 'tada';
+let background = 'ocean';
 
 function loadSounds() {
   createjs.Sound.registerSound('sounds/splash.wav', splash);
@@ -27,6 +28,7 @@ function loadSounds() {
   createjs.Sound.registerSound('sounds/rock.mp3', blocked);
   createjs.Sound.registerSound('sounds/shark.wav', caught);
   createjs.Sound.registerSound('sounds/tada.wav', congrats);
+  createjs.Sound.registerSound('sounds/ocean.wav', background);
 
 };
 
@@ -37,15 +39,30 @@ function playSplash() {
 function playRescue() {
   createjs.Sound.play(rescue);
 };
+
 function playBlocked() {
   createjs.Sound.play(blocked);
 };
+
 function playCaught() {
   createjs.Sound.play(caught);
 };
+
 function playCongrats() {
   createjs.Sound.play(congrats);
 };
+
+function stopCongrats() {
+  createjs.Sound.stop(congrats);
+}
+
+function playBackground() {
+  createjs.Sound.play(background);
+};
+
+function stopBackground() {
+  createjs.Sound.stop(background);
+}
 
 //loads all sounds
 loadSounds();
@@ -176,10 +193,10 @@ class Player {
 
   checkEnemyCollision() {
     for (var e = 0; e < allEnemies.length; e++) {
-      if (allEnemies[e].x < player.x + 75 &&
-        allEnemies[e].x + 75 > player.x &&
-        allEnemies[e].y < player.y + 50 &&
-        50 + allEnemies[e].y > player.y) {
+      if (allEnemies[e].x < player.x + 50 &&
+        allEnemies[e].x + 50 > player.x &&
+        allEnemies[e].y < player.y + 40 &&
+        40 + allEnemies[e].y > player.y) {
         player.died();
       }
     }
@@ -294,7 +311,6 @@ class Friend {
 
 // clears game board and congradulates player
 function playerWon() {
-  console.log('Player won!');
   allEnemies = [];
   allObstacles = [];
 
@@ -307,6 +323,7 @@ function playerWon() {
   ctx.lineWidth = 1;
 
   playCongrats();
+  setTimeout(stopCongrats, 6000);
 };
 
 // resets game to start state
@@ -316,6 +333,8 @@ function gameReset() {
   capturedFriends = [capturedFriend1, capturedFriend2, capturedFriend3, capturedFriend4];
   freedFriends = [];
   win = false;
+  stopBackground();
+  setTimeout(playBackground, 1500);
 };
 
 // instantiate objects
@@ -326,10 +345,10 @@ let capturedFriend2 = new Friend(250, 25, 'images/char-pink-girl-sad.png')
 let capturedFriend3 = new Friend(350, 25, 'images/char-princess-girl-sad.png')
 let capturedFriend4 = new Friend(450, 25, 'images/char-horn-girl-sad.png')
 
-let freedFriend1 = new Friend (0, 555, 'images/char-horn-girl.png');
-let freedFriend2 = new Friend (100, 555, 'images/char-princess-girl.png');
-let freedFriend3 = new Friend (500, 555, 'images/char-pink-girl.png');
-let freedFriend4 = new Friend (600, 555, 'images/char-cat-girl.png');
+let freedFriend1 = new Friend(0, 555, 'images/char-horn-girl.png');
+let freedFriend2 = new Friend(100, 555, 'images/char-princess-girl.png');
+let freedFriend3 = new Friend(500, 555, 'images/char-pink-girl.png');
+let freedFriend4 = new Friend(600, 555, 'images/char-cat-girl.png');
 
 let rock1 = new Obstacle('images/sea-rock.png');
 let rock2 = new Obstacle('images/sea-rock.png');
