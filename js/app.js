@@ -11,9 +11,9 @@ let obstacleYPosition = [130, 215, 300, 380, 465]
 let prevX = [];
 let prevY = [];
 
-// //determines if game is over
-// let win = false;
-//
+//determines if game is over
+let win = false;
+
 // //sound variables and functions
 // let waterSplash = "splash";
 //
@@ -166,6 +166,15 @@ class Player {
         obstacles.positionReset();
       });
       capturedFriends.pop();
+      if (freedFriends.length === 0) {
+        freedFriends.push(freedFriend1);
+      } else if (freedFriends.length === 1) {
+        freedFriends.push(freedFriend2);
+      } else if (freedFriends.length === 2) {
+        freedFriends.push(freedFriend3);
+      } else if (freedFriends.length === 3) {
+        freedFriends.push(freedFriend4);
+      };
       if (capturedFriends.length === 0) {
         win = true;
       }
@@ -266,7 +275,7 @@ function playerWon() {
 function gameReset() {
   allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6];
   allObstacles = [rock1, rock2, rock3, rock4, rock5, rock6];
-  capturedFriends = [friend1, friend2, friend3, friend4];
+  capturedFriends = [capturedFriend1, capturedFriend2, capturedFriend3, capturedFriend4];
   freedFriends = [];
   win = false;
 }
@@ -274,10 +283,15 @@ function gameReset() {
 
 let player = new Player(300, 555);
 
-let friend1 = new Friend(150, 25, 'images/char-cat-girl-sad.png')
-let friend2 = new Friend(250, 25, 'images/char-pink-girl-sad.png')
-let friend3 = new Friend(350, 25, 'images/char-princess-girl-sad.png')
-let friend4 = new Friend(450, 25, 'images/char-horn-girl-sad.png')
+let capturedFriend1 = new Friend(150, 25, 'images/char-cat-girl-sad.png')
+let capturedFriend2 = new Friend(250, 25, 'images/char-pink-girl-sad.png')
+let capturedFriend3 = new Friend(350, 25, 'images/char-princess-girl-sad.png')
+let capturedFriend4 = new Friend(450, 25, 'images/char-horn-girl-sad.png')
+
+let freedFriend1 = new Friend (0, 555, 'images/char-horn-girl.png');
+let freedFriend2 = new Friend (100, 555, 'images/char-princess-girl.png');
+let freedFriend3 = new Friend (500, 555, 'images/char-pink-girl.png');
+let freedFriend4 = new Friend (600, 555, 'images/char-cat-girl.png');
 
 let rock1 = new Obstacle('images/sea-rock.png');
 let rock2 = new Obstacle('images/sea-rock.png');
@@ -294,10 +308,8 @@ let enemy5 = new FastEnemy(300, 215);
 let enemy6 = new FastEnemy(300, 385);
 
 let allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6];
-// let allEnemies = [enemy1]
 let allObstacles = [rock1, rock2, rock3, rock4, rock5, rock6];
-// let allObstacles = []
-let capturedFriends = [friend1, friend2, friend3, friend4]
+let capturedFriends = [capturedFriend1, capturedFriend2, capturedFriend3, capturedFriend4]
 let freedFriends = [];
 
 // This listens for key presses and sends the keys to your

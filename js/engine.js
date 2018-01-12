@@ -213,7 +213,11 @@ var Engine = (function(global) {
         'images/char-cat-girl-sad.png',
         'images/char-horn-girl-sad.png',
         'images/char-pink-girl-sad.png',
-        'images/char-princess-girl-sad.png'
+        'images/char-princess-girl-sad.png',
+        'images/char-cat-girl.png',
+        'images/char-horn-girl.png',
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png'
         //credits to https://github.com/JayBtrdgrd for the 'sad' characters
 
     ]);
