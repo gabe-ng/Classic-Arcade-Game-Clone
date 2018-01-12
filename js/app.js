@@ -293,10 +293,10 @@ let enemy4 = new Enemy(10, 385);
 let enemy5 = new FastEnemy(300, 215);
 let enemy6 = new FastEnemy(300, 385);
 
-// let allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6];
-let allEnemies = [enemy1]
-// let allObstacles = [rock1, rock2, rock3, rock4, rock5, rock6];
-let allObstacles = []
+let allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6];
+// let allEnemies = [enemy1]
+let allObstacles = [rock1, rock2, rock3, rock4, rock5, rock6];
+// let allObstacles = []
 let capturedFriends = [friend1, friend2, friend3, friend4]
 let freedFriends = [];
 
