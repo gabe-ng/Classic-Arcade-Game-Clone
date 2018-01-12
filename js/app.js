@@ -165,7 +165,9 @@ class Player {
       allObstacles.forEach(function(obstacles) {
         obstacles.positionReset();
       });
+      // removes a captured friend
       capturedFriends.pop();
+      // turns the caputred friend into a freed friend
       if (freedFriends.length === 0) {
         freedFriends.push(freedFriend1);
       } else if (freedFriends.length === 1) {
@@ -175,6 +177,7 @@ class Player {
       } else if (freedFriends.length === 3) {
         freedFriends.push(freedFriend4);
       };
+      // checks to see if all friends are rescued and game is over
       if (capturedFriends.length === 0) {
         win = true;
       }
@@ -235,6 +238,7 @@ class Obstacle {
   update(dt) {
 
   }
+  // resets the poisitons everytime a friend is rescued
   positionReset() {
     this.x = obstacleXPosition[Math.floor(Math.random() * obstacleXPosition.length)];
     this.y = obstacleYPosition[Math.floor(Math.random() * obstacleYPosition.length)];
@@ -257,7 +261,7 @@ class Friend {
 
 };
 
-
+// clears game board and congradulates player
 function playerWon() {
   console.log('Player won!');
   allEnemies = [];
@@ -271,7 +275,7 @@ function playerWon() {
   ctx.fillText('Press Enter to Play Again!', 353, 440);
   ctx.lineWidth = 1;
 };
-
+// resets game to start state
 function gameReset() {
   allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6];
   allObstacles = [rock1, rock2, rock3, rock4, rock5, rock6];
@@ -280,7 +284,7 @@ function gameReset() {
   win = false;
 }
 
-
+// instantiate objects
 let player = new Player(300, 555);
 
 let capturedFriend1 = new Friend(150, 25, 'images/char-cat-girl-sad.png')
@@ -307,6 +311,7 @@ let enemy4 = new Enemy(10, 385);
 let enemy5 = new FastEnemy(300, 215);
 let enemy6 = new FastEnemy(300, 385);
 
+// arrays holding all objects
 let allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6];
 let allObstacles = [rock1, rock2, rock3, rock4, rock5, rock6];
 let capturedFriends = [capturedFriend1, capturedFriend2, capturedFriend3, capturedFriend4]
