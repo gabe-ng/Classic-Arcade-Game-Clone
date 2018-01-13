@@ -38,4 +38,6 @@ button {
   cursor:pointer;
   overflow: hidden;
   outline:none;
+  position:fixed;
+  margin-top: 20px;
 }

@@ -396,7 +396,7 @@ document.addEventListener('keyup', function(e) {
 let button = document.getElementsByTagName('button');
 let icon = button[0].firstElementChild;
 
-function toggleMute () {
+function toggleMute() {
   if (soundOn === true) {
     stopBackground();
     icon.setAttribute('class', 'fa fa-volume-off');
