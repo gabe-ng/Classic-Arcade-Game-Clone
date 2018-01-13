@@ -14,6 +14,9 @@ let prevY = [];
 //determines if game is over
 let win = false;
 
+//background music indicator
+let soundOn = true;
+
 //sound variables and functions
 let splash = 'splash';
 let rescue = 'rescued';
@@ -66,6 +69,9 @@ function stopBackground() {
 
 //loads all sounds
 loadSounds();
+
+//play background sound
+playBackground();
 
 // enemies our player must avoid
 class Enemy {
@@ -383,3 +389,23 @@ document.addEventListener('keyup', function(e) {
 
   player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
+//mute button
+
+let button = document.getElementsByTagName('button');
+let icon = button[0].firstElementChild;
+
+function toggleMute () {
+  if (soundOn === true) {
+    stopBackground();
+    icon.setAttribute('class', 'fa fa-volume-off');
+    soundOn = false;
+  } else if (soundOn === false) {
+    playBackground();
+    icon.setAttribute('class', 'fa fa-volume-up');
+    soundOn = true;
+  };
+};
+
+button[0].addEventListener('click', toggleMute);

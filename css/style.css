@@ -15,6 +15,7 @@ h3 {
 div {
   font-size: 30px;
 }
+
 section {
   margin-top: 40px;
   margin-right: 30px;
@@ -27,4 +28,14 @@ section {
 .scroll {
     height: 600px;
     overflow-y: auto;
+}
+
+button {
+  font-size: 20px;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
 }

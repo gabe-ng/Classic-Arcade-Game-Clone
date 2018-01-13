@@ -5,13 +5,14 @@
   <meta charset="UTF-8">
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <title>Arcade Game Clone: Island Rescue</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pirata+One">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-  <section class="left scroll">
+  <section class="left scroll" id="game-text">
 
     <h1>Udacity Arcade Game Clone
     </h1>
@@ -29,6 +30,10 @@
       </div>
 
   </section>
+
+  <button id="mute"> <i class="fa fa-volume-up" aria-hidden="true"></i>
+  </button>
+
 
   <!-- calls createjs sound API -->
   <script src="http://code.createjs.com/soundjs-0.5.2.min.js"></script>

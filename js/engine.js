@@ -60,7 +60,7 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
-        playBackground();
+
     }
 
     /* This function does some initial setup that should only occur once,
