@@ -25,8 +25,8 @@ var Engine = (function(global) {
     lastTime;
   gameStart = false;
 
-  canvas.width = 706;
-  canvas.height = 726;
+  canvas.width = 700;
+  canvas.height = 750;
   doc.body.appendChild(canvas);
 
   canvas.setAttribute("id", "my_canvas");
@@ -70,6 +70,8 @@ var Engine = (function(global) {
   function init() {
     lastTime = Date.now();
     main();
+    player.resetPosition();
+    setTimeout(playBackground, 1000);
   }
 
   /* This function is called by main (our game loop) and itself calls all
@@ -212,7 +214,7 @@ var Engine = (function(global) {
     'images/char-cat-girl.png',
     'images/char-horn-girl.png',
     'images/char-pink-girl.png',
-    'images/char-princess-girl.png'
+    'images/char-princess-girl.png',
     //credits to https://github.com/JayBtrdgrd for the 'sad' characters
 
   ]);
