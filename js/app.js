@@ -5,7 +5,7 @@ const randomInt = function(min, max) {
 
 //arrays to store possible obstacle poisitions
 let obstacleXPosition = [0, 100, 200, 300, 400, 500, 600]
-let obstacleYPosition = [130, 215, 300, 380, 465]
+let obstacleYPosition = [215, 300, 380, 465, 545]
 
 //arrays to hold players previous X, Y positions
 let prevX = [];
@@ -23,18 +23,20 @@ let rescue = 'rescued';
 let blocked = 'rock';
 let caught = 'shark';
 let congrats = 'tada';
-let background = 'ocean';
+let background = 'ocean-background';
 
+//function to preload all sound files
 function loadSounds() {
   createjs.Sound.registerSound('sounds/splash.wav', splash);
   createjs.Sound.registerSound('sounds/rescued.wav', rescue);
   createjs.Sound.registerSound('sounds/rock.mp3', blocked);
   createjs.Sound.registerSound('sounds/shark.wav', caught);
   createjs.Sound.registerSound('sounds/tada.wav', congrats);
-  createjs.Sound.registerSound('sounds/ocean.wav', background);
+  createjs.Sound.registerSound('sounds/ocean-background.wav', background);
 
 };
 
+//functions used to play/stop sounds
 function playSplash() {
   createjs.Sound.play(splash);
 };
@@ -61,17 +63,17 @@ function stopCongrats() {
 
 function playBackground() {
   createjs.Sound.play(background);
+  console.log('background sound on')
 };
 
 function stopBackground() {
   createjs.Sound.stop(background);
+  console.log('background sound off')
 }
 
-//loads all sounds
+//load all sounds
 loadSounds();
 
-//play background sound
-playBackground();
 
 // enemies our player must avoid
 class Enemy {
@@ -110,15 +112,7 @@ class FastEnemy extends Enemy {
 
 
 class Player {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.referenceY = y;
-    this.lives = 3;
-    this.up = true;
-    this.face = 50;
-    this.row = 7;
-    this.col = 3;
+  constructor() {
     this.sprite = 'images/char-boy.png';
   }
 
@@ -135,7 +129,9 @@ class Player {
   render() {
     //checks to see if game is over or not
     (!win) ?
+    //if game is not over, draw player
     (ctx.drawImage(Resources.get(this.sprite), this.x, this.y)) :
+    //if game is over draw player and win screen
     (ctx.drawImage(Resources.get(this.sprite), this.x, this.y), playerWon())
   }
 
@@ -146,7 +142,6 @@ class Player {
       case 'left':
         player.x -= 100;
         this.boundary();
-        this.col--;
         if (player.y < 555) {
           playSplash();
         };
@@ -155,7 +150,6 @@ class Player {
         player.y -= 85;
         //check for score
         this.scored();
-        this.row--;
         if (player.y < 555) {
           playSplash();
         };
@@ -163,7 +157,6 @@ class Player {
       case 'right':
         player.x += 100;
         this.boundary();
-        this.col++;
         if (player.y < 555) {
           playSplash();
         };
@@ -171,7 +164,6 @@ class Player {
       case 'down':
         player.y += 85;
         this.boundary();
-        this.row++;
         if (player.y < 555) {
           playSplash();
         };
@@ -191,8 +183,8 @@ class Player {
     } else if (player.x > 610) {
       player.x = 600;
       console.log('Player can\'t go past this point');
-    } else if (player.y > 580) {
-      player.y = 570;
+    } else if (player.y > 570) {
+      player.y = 550;
       console.log('Player can\'t go past this point');
     }
   }
@@ -214,6 +206,7 @@ class Player {
     if (player.y < 120) {
       console.log('Player rescued a friend!')
       player.resetPosition();
+      //change rock positions
       allObstacles.forEach(function(obstacles) {
         obstacles.positionReset();
       });
@@ -247,8 +240,6 @@ class Player {
   resetPosition() {
     player.x = 300;
     player.y = 555;
-    player.row = 7;
-    player.col = 3;
   }
 
   //captures the player's previous position
@@ -258,41 +249,42 @@ class Player {
     prevY.pop();
     prevY.push(this.y);
   }
-  //function used by obstacles to stop movement
+  //function used by obstacles to stop movement and keep player in same position
   stopMove() {
     this.x = prevX[0];
     this.y = prevY[0];
   }
 
   checkObstacleCollision() {
-    for (var o = 0; o < allObstacles.length; o++) {
-      if (allObstacles[o].x < player.x + 75 &&
-        allObstacles[o].x + 75 > player.x &&
-        allObstacles[o].y < player.y + 40 &&
-        40 + allObstacles[o].y > player.y) {
-        console.log('Path is blocked!');
-        player.stopMove();
-        playBlocked();
+      for (var o = 0; o < allObstacles.length; o++) {
+        if (allObstacles[o].x < player.x + 75 &&
+          allObstacles[o].x + 75 > player.x &&
+          allObstacles[o].y -85 < player.y + 40 &&
+          40 + allObstacles[o].y -85 > player.y) {
+          console.log('Path is blocked!');
+          player.stopMove();
+          playBlocked();
+        }
       }
     }
-  }
-};
+  };
+
 
 class Obstacle {
-  constructor(image) {
+  constructor(width, height, image) {
     this.x = obstacleXPosition[Math.floor(Math.random() * obstacleXPosition.length)];
     this.y = obstacleYPosition[Math.floor(Math.random() * obstacleYPosition.length)];
     this.sprite = image;
-    this.spriteHeight = 80;
-    this.spriteWidth = 100;
+    this.width = width;
+    this.height = height;
   }
   render() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.spriteWidth, this.spriteHeight);
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.width, this.height);
   }
   update(dt) {
 
   }
-  // resets the poisitons everytime a friend is rescued
+  // resets the poisitons every time a friend is rescued
   positionReset() {
     this.x = obstacleXPosition[Math.floor(Math.random() * obstacleXPosition.length)];
     this.y = obstacleYPosition[Math.floor(Math.random() * obstacleYPosition.length)];
@@ -339,12 +331,16 @@ function gameReset() {
   capturedFriends = [capturedFriend1, capturedFriend2, capturedFriend3, capturedFriend4];
   freedFriends = [];
   win = false;
+  player.resetPosition();
   stopBackground();
-  setTimeout(playBackground, 1500);
+  loadSounds();
+  soundOn = true;
+  icon.setAttribute('class', 'fa fa-volume-up');
+  setTimeout(playBackground, 6000);
 };
 
 // instantiate objects
-let player = new Player(300, 555);
+let player = new Player(300, 550);
 
 let capturedFriend1 = new Friend(150, 25, 'images/char-cat-girl-sad.png')
 let capturedFriend2 = new Friend(250, 25, 'images/char-pink-girl-sad.png')
@@ -356,12 +352,12 @@ let freedFriend2 = new Friend(100, 555, 'images/char-princess-girl.png');
 let freedFriend3 = new Friend(500, 555, 'images/char-pink-girl.png');
 let freedFriend4 = new Friend(600, 555, 'images/char-cat-girl.png');
 
-let rock1 = new Obstacle('images/sea-rock.png');
-let rock2 = new Obstacle('images/sea-rock.png');
-let rock3 = new Obstacle('images/sea-rock.png');
-let rock4 = new Obstacle('images/sea-rock2.png');
-let rock5 = new Obstacle('images/sea-rock2.png');
-let rock6 = new Obstacle('images/sea-rock2.png');
+let rock1 = new Obstacle(100, 80, 'images/sea-rock.png');
+let rock2 = new Obstacle(100, 80, 'images/sea-rock.png');
+let rock3 = new Obstacle(100, 80, 'images/sea-rock.png');
+let rock4 = new Obstacle(100, 80, 'images/sea-rock2.png');
+let rock5 = new Obstacle(100, 80, 'images/sea-rock2.png');
+let rock6 = new Obstacle(100, 80, 'images/sea-rock2.png');
 
 let enemy1 = new Enemy(10, 140);
 let enemy2 = new Enemy(10, 215);
@@ -391,11 +387,12 @@ document.addEventListener('keyup', function(e) {
 });
 
 
-//mute button
+//mute background sound button
 
 let button = document.getElementsByTagName('button');
 let icon = button[0].firstElementChild;
 
+//only mutes background sound, not sound effects
 function toggleMute() {
   if (soundOn === true) {
     stopBackground();

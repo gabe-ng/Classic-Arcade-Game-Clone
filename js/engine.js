@@ -23,7 +23,6 @@ var Engine = (function(global) {
     canvas = doc.createElement('canvas'),
     ctx = canvas.getContext('2d'),
     lastTime;
-  gameStart = false;
 
   canvas.width = 700;
   canvas.height = 750;
@@ -71,7 +70,7 @@ var Engine = (function(global) {
     lastTime = Date.now();
     main();
     player.resetPosition();
-    setTimeout(playBackground, 1000);
+    setTimeout(playBackground, 1000); //play background sound
   }
 
   /* This function is called by main (our game loop) and itself calls all
