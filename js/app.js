@@ -256,18 +256,18 @@ class Player {
   }
 
   checkObstacleCollision() {
-      for (var o = 0; o < allObstacles.length; o++) {
-        if (allObstacles[o].x < player.x + 75 &&
-          allObstacles[o].x + 75 > player.x &&
-          allObstacles[o].y -85 < player.y + 40 &&
-          40 + allObstacles[o].y -85 > player.y) {
-          console.log('Path is blocked!');
-          player.stopMove();
-          playBlocked();
-        }
+    for (var o = 0; o < allObstacles.length; o++) {
+      if (allObstacles[o].x < player.x + 75 &&
+        allObstacles[o].x + 75 > player.x &&
+        allObstacles[o].y - 85 < player.y + 40 &&
+        40 + allObstacles[o].y - 85 > player.y) {
+        console.log('Path is blocked!');
+        player.stopMove();
+        playBlocked();
       }
     }
-  };
+  }
+};
 
 
 class Obstacle {
