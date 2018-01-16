@@ -7,7 +7,7 @@ This is part of the [Udacity](https://www.udacity.com/course/front-end-web-devel
 <h2>Classic Arcade Game Clone
 <h4>Purpose:</h4>
 
- - Use object-oriented programming and HTML5 canvas to replicate and customize a the classic arcade game, Frogger.
+ - Use object-oriented programming and HTML5 canvas to replicate and customize the classic arcade game, Frogger.
 
 <h4>How to Play:</h4>
 
