@@ -140,31 +140,31 @@ class Player {
     this.currentPosition();
     switch (key) {
       case 'left':
-        player.x -= 100;
+        this.x -= 100;
         this.boundary();
-        if (player.y < 555) {
+        if (this.y < 555) {
           playSplash();
         };
         break;
       case 'up':
-        player.y -= 85;
+        this.y -= 85;
         //check for score
         this.scored();
-        if (player.y < 555) {
+        if (this.y < 555) {
           playSplash();
         };
         break;
       case 'right':
-        player.x += 100;
+        this.x += 100;
         this.boundary();
-        if (player.y < 555) {
+        if (this.y < 555) {
           playSplash();
         };
         break;
       case 'down':
-        player.y += 85;
+        this.y += 85;
         this.boundary();
-        if (player.y < 555) {
+        if (this.y < 555) {
           playSplash();
         };
         break;
@@ -177,25 +177,25 @@ class Player {
 
   // prevent player from leaving the game canvas
   boundary() {
-    if (player.x < 0) {
-      player.x = 0;
+    if (this.x < 0) {
+      this.x = 0;
       console.log('Player can\'t go past this point');
-    } else if (player.x > 610) {
-      player.x = 600;
+    } else if (this.x > 610) {
+      this.x = 600;
       console.log('Player can\'t go past this point');
-    } else if (player.y > 570) {
-      player.y = 550;
+    } else if (this.y > 570) {
+      this.y = 550;
       console.log('Player can\'t go past this point');
     }
   }
 
   checkEnemyCollision() {
     for (var e = 0; e < allEnemies.length; e++) {
-      if (allEnemies[e].x < player.x + 50 &&
-        allEnemies[e].x + 50 > player.x &&
-        allEnemies[e].y < player.y + 40 &&
-        40 + allEnemies[e].y > player.y) {
-        player.died();
+      if (allEnemies[e].x < this.x + 50 &&
+        allEnemies[e].x + 50 > this.x &&
+        allEnemies[e].y < this.y + 40 &&
+        40 + allEnemies[e].y > this.y) {
+        this.died();
       }
     }
   }
@@ -203,9 +203,9 @@ class Player {
 
   // check to see if player reaches the water
   scored() {
-    if (player.y < 120) {
+    if (this.y < 120) {
       console.log('Player rescued a friend!')
-      player.resetPosition();
+      this.resetPosition();
       //change rock positions
       allObstacles.forEach(function(obstacles) {
         obstacles.positionReset();
@@ -232,14 +232,14 @@ class Player {
 
   died() {
     console.log('Shark food!')
-    player.resetPosition();
+    this.resetPosition();
     playCaught();
   }
 
   //resets the player to initial position
   resetPosition() {
-    player.x = 300;
-    player.y = 555;
+    this.x = 300;
+    this.y = 555;
   }
 
   //captures the player's previous position
@@ -257,12 +257,12 @@ class Player {
 
   checkObstacleCollision() {
     for (var o = 0; o < allObstacles.length; o++) {
-      if (allObstacles[o].x < player.x + 75 &&
-        allObstacles[o].x + 75 > player.x &&
-        allObstacles[o].y - 85 < player.y + 40 &&
-        40 + allObstacles[o].y - 85 > player.y) {
+      if (allObstacles[o].x < this.x + 75 &&
+        allObstacles[o].x + 75 > this.x &&
+        allObstacles[o].y - 85 < this.y + 40 &&
+        40 + allObstacles[o].y - 85 > this.y) {
         console.log('Path is blocked!');
-        player.stopMove();
+        this.stopMove();
         playBlocked();
       }
     }
