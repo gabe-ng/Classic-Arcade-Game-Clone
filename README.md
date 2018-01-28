@@ -22,7 +22,7 @@ This is part of the [Udacity](https://www.udacity.com/course/front-end-web-devel
  <h4>Where to Play:</h4>
  
  - To play on GitHub.io: [Arcade Game Clone](https://gabe-ng.github.io/Classic-Arcade-Game-Clone/)
- - Clone or Download here: [Repository](https://github.com/gabe-ng/Classic-Arcade-Game-Clone) and the open index.html in your browser.
+ - Clone or Download [here](https://github.com/gabe-ng/Classic-Arcade-Game-Clone) and the open index.html in your browser.
  
  You can check out the original repository [here](https://github.com/richardkalehoff/udacity-project-arcade-game).
 
