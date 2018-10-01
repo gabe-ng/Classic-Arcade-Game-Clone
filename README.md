@@ -1,9 +1,3 @@
----
-This is part of the [Udacity](https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001) Front-End Web Development Program.
-
-
-----------
-
 <h2>Classic Arcade Game Clone
 <h4>Purpose:</h4>
 
@@ -24,5 +18,3 @@ This is part of the [Udacity](https://www.udacity.com/course/front-end-web-devel
  - To play on GitHub.io: [Arcade Game Clone](https://gabe-ng.github.io/Classic-Arcade-Game-Clone/)
  - Clone or Download [here](https://github.com/gabe-ng/Classic-Arcade-Game-Clone) and the open index.html in your browser.
  
- You can check out the original repository [here](https://github.com/richardkalehoff/udacity-project-arcade-game).
-
