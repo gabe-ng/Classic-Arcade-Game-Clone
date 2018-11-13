@@ -15,6 +15,6 @@
  
  <h4>Where to Play:</h4>
  
- - To play on GitHub.io: [Arcade Game Clone](https://gabe-ng.github.io/Classic-Arcade-Game-Clone/)
+ - To play on GitHub.io: [Frogger Clone](https://gabe-ng.github.io/frogger-clone/)
  - Clone or Download [here](https://github.com/gabe-ng/Classic-Arcade-Game-Clone) and the open index.html in your browser.
  
